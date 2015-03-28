@@ -1,0 +1,44 @@
+{
+    "hikes": [{
+            "name": "Old Rag Mountain",
+            "url": "/snp/oldrag/",
+            "ratings": ["4", "2", "6", "0", "1", "0", "6"]
+        }, {
+            "name": "White Oak/Cedar Run",
+            "url": "/SNP/WhiteOakCedarRun/",
+            "ratings": ["4", "5", "1", "1", "1"]
+        }, {
+            "name": "Strickler Knob",
+            "url": "/GWNF/StricklerKnob/",
+            "ratings": ["5", "1", "6", "3", "2"]
+        }, {
+            "name": "Crabtree Falls",
+            "url": "/GWNF/CrabtreeFalls/",
+            "ratings": ["2", "5", "2", "1", "4", "5", "4", "3", "5"]
+        }, {
+            "name": "Signal Knob",
+            "url": "/GWNF/SignalKnob/",
+            "ratings": ["4", "2", "5", "3", "4"]
+        }, {
+            "name": "Overall Run/Beecher Ridge",
+            "url": "/SNP/OverallRunBeecherRidge/",
+            "ratings": ["4", "5", "4", "2", "1"]
+        }, {
+            "name": "Raven Rocks",
+            "url": "/OVH/RavenRocks/",
+            "ratings": ["3", "2", "4", "3", "1"]
+        }, {
+            "name": "Little Devils Stairs",
+            "url": "/SNP/LittleDevilsStairs/",
+            "ratings": ["3", "4", "1", "2", "1"]
+        }, {
+            "name": "Big Schloss",
+            "url": "/GWNF/BigSchloss/",
+            "ratings": ["2", "5", "2", "4"]
+        }, {
+            "name": "Three Ridges",
+            "url": "/GWNF/ThreeRidges/",
+            "ratings": ["5", "4", "5", "2", "5"]
+        }
+    ]
+}
