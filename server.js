@@ -66,7 +66,12 @@ app.get('/scraper/', function (req, res) {
                     item.ratings = [];
                     $("img[src*='stars']").each(function(idx, val) {
                         //Need to account for missing ratings and multiple lines of ratings.
-                        item.ratings[idx] = $(this).attr('src').split('/stars/')[1].substring(4,5);
+                        try {
+                            item.ratings[idx] = parseInt($(this).attr('src').split('/stars/')[1].substring(4,5), 10);
+                        } catch(e) {
+                            console.log(e);
+                            item.ratings[idx] = 0;
+                        }
                     });
                     Scraper.evaluator(collection, res)
                 });

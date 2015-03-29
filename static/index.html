@@ -23,6 +23,9 @@
             th, td {
                 text-align: center;
             }
+            fieldset > legend span {
+                margin-right: 10px;
+            }
         </style>
     </head>
     <body ng-app="HikeApp">
@@ -50,6 +53,17 @@
                     </table>
                 </li>
             </ul>
+            <!-- Chord isn't the best visualization to use for this -->
+            <fieldset>
+                <legend>
+                    <span style="color:#8c8c8c;">Difficulty</span>
+                    <span style="color:#49708a;">Streams</span>
+                    <span style="color:#d0e0eb;">Views</span>
+                    <span style="color:#82b3ae;">Solitude</span>
+                    <span style="color:#bce3c5;">Camping</span>
+                </legend>
+                <div id="chord"></div>
+            </fieldset>
         </div>
     </body>
 </html>
