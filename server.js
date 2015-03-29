@@ -5,11 +5,11 @@
  * I used startsWith to check some of the URL src attributes.
  */
 
-String.prototype.startsWith = function (part){
+String.prototype.startsWith = function (part) {
     return this.slice(0, part.length) == part;
 };
 
-String.prototype.endsWith = function (part){
+String.prototype.endsWith = function (part) {
     return this.slice(-part.length) == part;
 };
 
@@ -17,7 +17,12 @@ var express = require('express');
 var request = require('request');
 var app = express();
 
-app.get('/', function (req, res) {
+/*
+ * Serve static content.
+ */
+app.use('/', express.static(__dirname + '/static')); 
+
+app.get('/scraper/', function (req, res) {
 
     /*
      * Simple object to evaluate callbacks that need to be completed before returning the response.

@@ -2,7 +2,7 @@
     "hikes": [{
             "name": "Old Rag Mountain",
             "url": "/snp/oldrag/",
-            "ratings": ["4", "2", "6", "0", "1", "0", "6"]
+            "ratings": ["4", "2", "6", "0", "1"]
         }, {
             "name": "White Oak/Cedar Run",
             "url": "/SNP/WhiteOakCedarRun/",
@@ -14,7 +14,7 @@
         }, {
             "name": "Crabtree Falls",
             "url": "/GWNF/CrabtreeFalls/",
-            "ratings": ["2", "5", "2", "1", "4", "5", "4", "3", "5"]
+            "ratings": ["4", "5", "4", "3", "5"]
         }, {
             "name": "Signal Knob",
             "url": "/GWNF/SignalKnob/",
@@ -34,7 +34,7 @@
         }, {
             "name": "Big Schloss",
             "url": "/GWNF/BigSchloss/",
-            "ratings": ["2", "5", "2", "4"]
+            "ratings": ["2", "0", "5", "2", "4"]
         }, {
             "name": "Three Ridges",
             "url": "/GWNF/ThreeRidges/",
