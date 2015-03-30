@@ -1,19 +1,84 @@
 <!DOCTYPE html>
-
-<html>
-    <head>
-        <title>Popular Hikes - Virginia</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<html lang="en">
+	<head>
+	    <title>Hiking the Shenandoah National Park, the Appalachian Trail, and more.</title>
+		<meta name="keywords" content="hiking, shenandoah national park, appalachian trail, waterfalls" />
+		<meta name="description" content="Roaming Mojo is a web site dedicated to documenting hiking in the Shenandoah National Park, the Appalachian Trail, and more." />
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
         <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-        <script src="hike.js"></script>
-        <style media="screen">
-            body {
-                font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-            }
-            div > ul > li {
-                margin-bottom: 50px;
-            }
-            table { 
+        <script src="hikes.js"></script>
+		<!--[if IE]>
+			<script src="html5.js"></script>
+		<![endif]-->
+		<style media="screen">
+			body {
+				font-family: "Segoe UI", Tahoma, "Trebuchet MS";
+				/*font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;*/
+				background-color: #fff;
+				margin: 0px;
+				padding: 0px;
+			}
+			header {
+				position: relative;
+				top: 300px;
+			}
+			header > h1, header > h2 {
+				font-weight: normal;
+				margin: 0px;
+				background-color: #fff;
+				display: inline;
+				padding: 5px;
+			}
+			header > p {
+				background-color: #fff;
+				display: inline;
+				padding: 5px;
+			}
+			main {
+				display: block;
+				margin: 0px;
+				background-image: url('shenandoah-national-park-hiking-overlook.jpg');
+				background-position: center bottom;
+				height: 750px;
+			}
+			footer {
+				text-align: center;
+				clear: both;
+			}
+			section {
+			        width: 100%;
+			}
+			section > div {
+				position: relative;
+				width: 44%;
+				padding: 3%;
+			}
+			section .left {
+				float: left;
+			}
+			section .right {
+				float: right;
+			}
+			section > h1 {
+				font-weight: normal;
+				margin-left: 20px;
+			}
+			section > div > h2 {
+				font-weight: normal;
+			}
+			fieldset {
+				clear: both;
+				text-align: center;
+				border: 1px solid #999;
+				margin: 10px 100px 30px 100px;
+			}
+			fieldset > legend {
+				text-align: left;
+			}
+			fieldset > legend > span {
+				margin-right: 10px;
+			}
+			table { 
                 border-spacing: 10px;
                 border-collapse: separate;
             }
@@ -23,47 +88,65 @@
             th, td {
                 text-align: center;
             }
-            fieldset > legend span {
-                margin-right: 10px;
-            }
-        </style>
-    </head>
-    <body ng-app="HikeApp">
-        <div ng-controller="HikeController">
-            <h1>{{ info }}</h1>
-            <ul>
-                <li ng-repeat="hike in results.hikes track by $index">
-                    <p><strong>{{ hike.name }}</strong></p>
-                    <p><em>Hiking Upward: <a href="http://www.hikingupward.com{{ hike.url }}">{{ hike.url }}</a></em></p>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Difficulty</th>
-                                <th>Streams</th>
-                                <th>Views</th>
-                                <th>Solitude</th>
-                                <th>Camping</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td ng-repeat="rate in hike.ratings track by $index">{{ rate }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </li>
-            </ul>
-            <!-- Chord isn't the best visualization to use for this -->
+			#chord {
+				width: 550px;
+				margin: auto;
+			}
+			.hiking-image {
+				width: 340px;
+				opacity: 0.5;
+				filter: alpha(opacity=50); /* legacy */
+			}
+		</style>
+	</head>
+	<body ng-app="HikeApp">
+		<main>
+			<header>
+				<h1>Roaming Mojo</h1>
+				<br /><br />
+				<h2>Hiking the Shenandoah National Park, the Appalachian Trail, and more.</h2>
+			</header>
+		</main>
+		<section ng-controller="HikeController">
+			<h1>{{ info }}</h1>
+			<div ng-repeat="hike in results.hikes" ng-class-odd="'left'" ng-class-even="'right'">
+				<h2>{{ hike.name }}</h2>
+				<div ng-if="hike.name == 'Old Rag Mountain'">
+					<img src="old-rag-mountain-snp.jpg" alt="{{ hike.name }}" title="{{ hike.name }}" class="hiking-image" />
+				</div>
+				<p><em>Hiking Upward: <a href="http://www.hikingupward.com{{ hike.url }}">{{ hike.url }}</a></em></p>
+				<table>
+					<thead>
+						<tr>
+							<th>Difficulty</th>
+							<th>Streams</th>
+							<th>Views</th>
+							<th>Solitude</th>
+							<th>Camping</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td ng-repeat="rate in hike.ratings track by $index">{{ rate }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- Chord isn't the best visualization to use for this -->
             <fieldset>
                 <legend>
-                    <span style="color:#8c8c8c;">Difficulty</span>
-                    <span style="color:#49708a;">Streams</span>
-                    <span style="color:#d0e0eb;">Views</span>
-                    <span style="color:#82b3ae;">Solitude</span>
-                    <span style="color:#bce3c5;">Camping</span>
+                    <span style="color:#8c8c8c;">Old Rag Mountain</span>
+                    <span style="color:#49708a;">White Oak/Cedar Run</span>
+                    <span style="color:#d0e0eb;">Strickler Knob</span>
+                    <span style="color:#82b3ae;">Crabtree Falls</span>
+                    <span style="color:#bce3c5;">Signal Knob</span>
                 </legend>
                 <div id="chord"></div>
+				<p>Relationship based on hiking views.</p>
             </fieldset>
-        </div>
-    </body>
+		</section>
+		<footer>
+			<p><small></small></p>
+		</footer>
+	</body>
 </html>

@@ -2,7 +2,7 @@ var PopularHikes = function($scope, $http) {
   $scope.info = "Popular Hikes according to Hiking Upward";
   $scope.results = {};
   $scope.matrix = [];
-                
+  
   var resp = $http.get("data.json");
 
   resp.success(function(data, status, headers, config) {
@@ -28,6 +28,20 @@ app.controller('HikeController', PopularHikes);
  * The D3 code should probably go elsewhere and have the AngularJS scoped variable passed to it.
  */
 function renderD3(matrix) {
+
+  /*
+   * Data from JSON isn't ideal for mapping the relationships.
+   * Using the manual data below for now.
+   * Will need to create a ranking algorithm based on multiple categories.
+   */
+  matrix = [
+//  OR, WO, SK, CF, SK
+    [6, 1, 6, 4, 5], //6 - Old Rag
+    [1, 1, 1, 3, 2], //1 - White Oak
+    [6, 1, 6, 4, 2], //6 - Strickler Knob
+    [4, 3, 4, 4, 5], //4 - Crabtree Falls
+    [5, 2, 5, 5, 5], //5 - Signal Knob
+  ];
 
   var width = 550;
   var height = 550;
@@ -63,7 +77,9 @@ function renderD3(matrix) {
     .attr("d", d3.svg.arc()
           .innerRadius(innerRadius)
           .outerRadius(outerRadius))
-  
+          .on("mouseover", fade(.1))
+          .on("mouseout", fade(1));
+
     svg.append("g")
       .attr("class", "chord")
       .selectAll("path")
@@ -74,4 +90,14 @@ function renderD3(matrix) {
       })
       .attr("d", d3.svg.chord().radius(innerRadius))
       .style("opacity", 1);
+      
+      function fade(opacity) {
+        return function(g, i) {
+          svg.selectAll(".chord path")
+            .filter(function(d) { return d.source.index != i && d.target.index != i; })
+            .transition()
+            .style("opacity", opacity);
+        };
+      }
+
 }

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Popular Hikes - Virginia</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <script src="hikes.js"></script>
+        <style media="screen">
+            body {
+                font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+            }
+            div > ul > li {
+                margin-bottom: 50px;
+            }
+            table { 
+                border-spacing: 10px;
+                border-collapse: separate;
+            }
+            th {
+                font-weight: normal;
+            }
+            th, td {
+                text-align: center;
+            }
+            fieldset > legend span {
+                margin-right: 10px;
+            }
+        </style>
+    </head>
+    <body ng-app="HikeApp">
+        <div ng-controller="HikeController">
+            <h1>{{ info }}</h1>
+            <ul>
+                <li ng-repeat="hike in results.hikes">
+                    <p><strong>{{ hike.name }}</strong></p>
+                    <p><em>Hiking Upward: <a href="http://www.hikingupward.com{{ hike.url }}">{{ hike.url }}</a></em></p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Difficulty</th>
+                                <th>Streams</th>
+                                <th>Views</th>
+                                <th>Solitude</th>
+                                <th>Camping</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td ng-repeat="rate in hike.ratings track by $index">{{ rate }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+            </ul>
+            <!-- Chord isn't the best visualization to use for this -->
+            <fieldset>
+                <legend>
+                    <span style="color:#8c8c8c;">Old Rag Mountain</span>
+                    <span style="color:#49708a;">White Oak/Cedar Run</span>
+                    <span style="color:#d0e0eb;">Strickler Knob</span>
+                    <span style="color:#82b3ae;">Crabtree Falls</span>
+                    <span style="color:#bce3c5;">Signal Knob</span>
+                </legend>
+                <div id="chord"></div>
+            </fieldset>
+        </div>
+    </body>
+</html>
