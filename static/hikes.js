@@ -15,6 +15,7 @@ var PopularHikes = function($scope, $http) {
         }
       }
       renderD3($scope.matrix);
+      renderMap();
   });
   resp.error(function(data, status, headers, config) {
       alert(status);
@@ -25,7 +26,7 @@ var app = angular.module("HikeApp", []);
 app.controller('HikeController', PopularHikes);
 
 /*
- * The D3 code should probably go elsewhere and have the AngularJS scoped variable passed to it.
+ * The D3 code should go elsewhere and have the AngularJS scoped variable passed to it.
  */
 function renderD3(matrix) {
 
@@ -99,5 +100,23 @@ function renderD3(matrix) {
             .style("opacity", opacity);
         };
       }
+}
 
+/*
+ * This shouldn't go here either.
+ * For brevity, I added JS code to this file. It'll be put in its proper place later.
+ */
+function renderMap() {
+  var map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM({layer: 'sat'})
+          })
+        ],
+        view: new ol.View({
+          center: ol.proj.transform([-78.28705, 38.57036], 'EPSG:4326', 'EPSG:3857'),
+          zoom: 13
+        })
+      });
 }
