@@ -107,16 +107,46 @@ function renderD3(matrix) {
  * For brevity, I added JS code to this file. It'll be put in its proper place later.
  */
 function renderMap() {
+  
+  var markers = [
+    new ol.Feature({
+      geometry: new ol.geom.Point(ol.proj.transform([-78.28705, 38.57036], 'EPSG:4326', 'EPSG:3857')),
+      name: 'Old Rag Mountain Trailhead'
+    }),
+    new ol.Feature({
+      geometry: new ol.geom.Point(ol.proj.transform([-78.34935, 38.53927], 'EPSG:4326', 'EPSG:3857')),
+      name: 'White Oak Canyon/Cedar Run '
+    })
+  ];
+  
+  var iconStyle = new ol.style.Style({
+    image: new ol.style.Icon(({
+      anchor: [0.5, 1.0],
+      anchorXUnits: 'fraction',
+      anchorYUnits: 'pixels',
+      opacity: 0.75,
+      src: 'reddot.png'
+    }))
+  });
+
+  for(var i = 0; i < markers.length; i++) {
+    markers[i].setStyle(iconStyle);
+  }
+  
   var map = new ol.Map({
-        target: 'map',
-        layers: [
-          new ol.layer.Tile({
-            source: new ol.source.OSM({layer: 'sat'})
-          })
-        ],
-        view: new ol.View({
-          center: ol.proj.transform([-78.28705, 38.57036], 'EPSG:4326', 'EPSG:3857'),
-          zoom: 13
-        })
-      });
+    target: 'map',
+    layers: [
+      new ol.layer.Tile({
+        source: new ol.source.OSM({ layer: 'sat' })
+      }),
+      new ol.layer.Vector({
+        source: new ol.source.Vector({ features: markers })
+      })
+    ],
+    view: new ol.View({
+      center: ol.proj.transform([-78.28705, 38.57036], 'EPSG:4326', 'EPSG:3857'),
+      zoom: 12
+    })
+  });
+
 }
